@@ -1,1 +1,1 @@
-# Customer-Segmentation-using-RFM-Analysis
+# Reseller Segmentation using RFM Analysis
