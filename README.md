@@ -14,6 +14,9 @@ The analysis is performed using the `FactResellerSales` table, which contains tr
 
 - **SQL Server Management Studio (SSMS)** for querying and data processing.
 - **Power BI** for data visualization and insights.
+- **Python** for querying and data processing, and data visualization.
+
+*Even though SQL and Power BI are sufficient for these tasks. However, I incorporated Python to expand the project scope.*
 
 ## Data Cleaning and Preparation
 
@@ -30,7 +33,9 @@ The analysis is performed using the `FactResellerSales` table, which contains tr
 
 ## Data Analysis
 
-The following segment demonstrates how to use `NTILE(5)` for segmentation in SQL, which evenly distributes data across 5 groups.
+I use percentiles, specifically quintiles, to segment data in SQL, ensuring an even distribution into five groups. This helps create more meaningful customer categories.
+
+In SQL Server, I use `NTILE()`:
 ```sql
 -- Recency Calculation
 DROP TABLE IF EXISTS #Recency_Category;
@@ -41,6 +46,14 @@ SELECT
 INTO #Recency_Category
 FROM FactResellerSales
 GROUP BY ResellerKey;
+```
+In Python, I use `pd.qcut()`:
+```python
+# Recency Calculation
+current_date = df_FactResellerSales['OrderDate'].max()
+df_recency = df_FactResellerSales.groupby('ResellerKey')['OrderDate'].max().reset_index()
+df_recency['GapDay'] = (current_date - df_recency['OrderDate']).dt.days
+df_recency['Recency'] = pd.qcut(df_recency['GapDay'], 5, labels=False, duplicates='drop') + 1
 ```
 
 ## Application
@@ -67,7 +80,7 @@ GROUP BY ResellerKey;
 ## How to Use
 
 - Run the SQL script in **SQL Server** with the `AdventureWorksDW2022` database.
-- Modify the reference date (`MIN(OrderDate)`) as needed.
+- Modify the reference date `MIN(OrderDate)` as needed.
 - Customize segmentation rules based on business needs.
 
 ---
@@ -75,5 +88,6 @@ GROUP BY ResellerKey;
 If you find this project useful, feel free to ⭐ the repository and contribute with improvements!
 
 📌 **Author:** Nguyễn Hoàng Gia Phúc
+
 📧 **Contact:** nguyenhoanggiaphucwork@gmail.com
 
