@@ -44,16 +44,29 @@ SELECT
 	DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') GapDay,
 	CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) AS Recency_Score,
     CASE 
-        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.2 THEN 5
-        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.4 THEN 4
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.2 THEN 1
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.4 THEN 2
         WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.6 THEN 3
-        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.8 THEN 2
-        ELSE 1
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.8 THEN 4
+        ELSE 5
     END AS Recency
 INTO #Recency_Category
 FROM FactResellerSales
 GROUP BY ResellerKey;
 ```
+
+In SQL Server, I also use another approach, which is using `NTILE()`:
+```sql
+SELECT
+	ResellerKey,
+	DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') GapDay,
+	CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) AS Recency_Score,
+    NTILE(5) OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) AS Recency
+INTO #Recency_Category
+FROM FactResellerSales
+GROUP BY ResellerKey;
+```
+
 In Python, I use `pd.qcut()`:
 ```python
 # Recency Calculation
