@@ -1,5 +1,7 @@
 # Reseller Segmentation using RFM Analysis
 
+---
+
 ## Overview
 
 This project performs **RFM (Recency, Frequency, Monetary) Analysis** to segment resellers based on their purchasing behavior. The analysis categorizes resellers into different reseller segments, helping businesses identify valuable resellers and strategize marketing efforts.
@@ -67,6 +69,8 @@ FROM FactResellerSales
 GROUP BY ResellerKey;
 ```
 
+![Reseller RFM Segmentation using NTILE()](https://github.com/user-attachments/assets/d062854c-0cdc-4362-a024-05ddae1bd5e7)
+
 In Python, I use `pd.qcut()`:
 ```python
 # Recency Calculation
@@ -89,16 +93,9 @@ df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], 
 
 ## Limitations
 
-- The results are based on historical data and may not reflect future trends.
-- 
-
----
-
-## How to Use
-
-- Run the SQL script in **SQL Server** with the `AdventureWorksDW2022` database.
-- Modify the reference date `'2013-11-29'` as needed.
-- Customize segmentation rules based on business needs.
+- The results are based on historical data and may not reflect future trends. Regular updates are needed to track customer behavior dynamically. Modify the reference date `'2013-11-29'` as needed.
+- External market trends or competitor activity are not considered in this segmentation.
+- My different approaches may have some differences in results. The RFM thresholds and segmentation rules may not be universally applicable and should be adjusted based on specific business needs.
 
 ---
 
