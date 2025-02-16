@@ -57,6 +57,8 @@ FROM FactResellerSales
 GROUP BY ResellerKey;
 ```
 
+![image](https://github.com/user-attachments/assets/7fd5c93a-a3f8-4fbb-8235-1cc212aba9b8)
+
 In SQL Server, I also use another approach, which is using `NTILE()`:
 ```sql
 SELECT
@@ -69,7 +71,7 @@ FROM FactResellerSales
 GROUP BY ResellerKey;
 ```
 
-![Reseller RFM Segmentation using NTILE()](https://github.com/user-attachments/assets/d062854c-0cdc-4362-a024-05ddae1bd5e7)
+![Reseller RFM Segmentation using NTILE()](https://github.com/user-attachments/assets/ffa81df2-a1a3-40bd-a6d0-d2a6b091ffe1)
 
 In Python, I use `pd.qcut()`:
 ```python
@@ -79,6 +81,9 @@ df_recency = df_FactResellerSales.groupby('ResellerKey')['OrderDate'].max().rese
 df_recency['GapDay'] = (current_date - df_recency['OrderDate']).dt.days
 df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], duplicates='drop')
 ```
+
+![image](https://github.com/user-attachments/assets/237e6453-428f-4d40-96da-7b85c30256fd)
+
 
 ## Application
 
