@@ -35,14 +35,21 @@ The analysis is performed using the `FactResellerSales` table, which contains tr
 
 I use percentiles, specifically quintiles, to segment data in SQL, ensuring an even distribution into five groups. This helps create more meaningful reseller categories.
 
-In SQL Server, I use `NTILE()`:
+In SQL Server, I use `CUME_DIST()`:
 ```sql
 -- Recency Calculation
-DROP TABLE IF EXISTS #Recency_Category;
+DROP TABLE IF EXISTS #Recency_Category
 SELECT
-    ResellerKey,
-    DATEDIFF(DAY, MAX(OrderDate), MIN(OrderDate)) AS GapDay,
-    NTILE(5) OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), MIN(OrderDate)) DESC) AS Recency
+	ResellerKey,
+	DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') GapDay,
+	CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) AS Recency_Score,
+    CASE 
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.2 THEN 5
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.4 THEN 4
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.6 THEN 3
+        WHEN CUME_DIST() OVER (ORDER BY DATEDIFF(DAY, MAX(OrderDate), '2013-11-29') DESC) <= 0.8 THEN 2
+        ELSE 1
+    END AS Recency
 INTO #Recency_Category
 FROM FactResellerSales
 GROUP BY ResellerKey;
