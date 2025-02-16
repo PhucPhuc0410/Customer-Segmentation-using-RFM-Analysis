@@ -33,7 +33,7 @@ The analysis is performed using the `FactResellerSales` table, which contains tr
 
 ## Data Analysis
 
-I use percentiles, specifically quintiles, to segment data in SQL, ensuring an even distribution into five groups. This helps create more meaningful customer categories.
+I use percentiles, specifically quintiles, to segment data in SQL, ensuring an even distribution into five groups. This helps create more meaningful reseller categories.
 
 In SQL Server, I use `NTILE()`:
 ```sql
