@@ -70,10 +70,10 @@ GROUP BY ResellerKey;
 In Python, I use `pd.qcut()`:
 ```python
 # Recency Calculation
-current_date = df_FactResellerSales['OrderDate'].max()
+current_date = datetime(2013, 11, 29)
 df_recency = df_FactResellerSales.groupby('ResellerKey')['OrderDate'].max().reset_index()
 df_recency['GapDay'] = (current_date - df_recency['OrderDate']).dt.days
-df_recency['Recency'] = pd.qcut(df_recency['GapDay'], 5, labels=False, duplicates='drop') + 1
+df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], duplicates='drop')
 ```
 
 ## Application
@@ -85,27 +85,24 @@ df_recency['Recency'] = pd.qcut(df_recency['GapDay'], 5, labels=False, duplicate
 
 ## Recommendations
 
-- **Personalized Marketing**: Use RFM segments to tailor email campaigns, discounts, or loyalty rewards.
-- **Customer Retention Strategies**: Implement engagement strategies for "At Risk" and "Hibernating" customers.
-- **Optimizing Customer Acquisition**: Identify behaviors of high-value customers and find similar prospects.
+- 
 
 ## Limitations
 
-- **Static Analysis**: The results are based on historical data and may not reflect future trends.
-- **No Customer Sentiment Data**: This model does not account for qualitative feedback from customers.
-- **Threshold Sensitivity**: Changing NTILE segmentation may impact the classification results.
+- The results are based on historical data and may not reflect future trends.
+- 
 
 ---
 
 ## How to Use
 
 - Run the SQL script in **SQL Server** with the `AdventureWorksDW2022` database.
-- Modify the reference date `MIN(OrderDate)` as needed.
+- Modify the reference date `'2013-11-29'` as needed.
 - Customize segmentation rules based on business needs.
 
 ---
 
-If you find this project useful, feel free to ⭐ the repository and contribute with improvements!
+If you find this project useful, feel free to ⭐. Sự ủng hộ của bạn sẽ là siêu động lực của tôi ❤️.
 
 📌 **Author:** Nguyễn Hoàng Gia Phúc
 
