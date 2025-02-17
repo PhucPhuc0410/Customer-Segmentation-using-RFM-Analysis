@@ -106,7 +106,7 @@ df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], 
 
 → The potential reason behind this inactivity might be dissatisfaction with the purchasing experience. The company should conduct surveys and research to identify underlying issues and implement corrective measures promptly. However, there is still an opportunity to re-engage this group in the near future.
 
-- Lastly, the Hibernating, About to Sleep, and Lost resellers form a sizable but low-value segment, characterized by weak purchasing behavior and low order value.
+- Lastly, the **Hibernating**, **About to Sleep**, and **Lost** resellers form a sizable but low-value segment, characterized by weak purchasing behavior and low order value.
 
 → Reactivating these resellers is challenging and would require a well-defined strategy to reposition the brand and address any negative perceptions they may have.
 
