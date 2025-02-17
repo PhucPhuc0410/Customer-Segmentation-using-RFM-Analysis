@@ -118,7 +118,7 @@ df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], 
 
 ---
 
-If you find this project useful, feel free to ⭐. Sự ủng hộ của bạn sẽ là siêu động lực của tôi ❤️.
+If you find this project useful, feel free to ⭐. Your support will be my super motivation ❤️.
 
 📌 **Author:** Nguyễn Hoàng Gia Phúc
 
