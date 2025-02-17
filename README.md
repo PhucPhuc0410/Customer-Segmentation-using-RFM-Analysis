@@ -94,7 +94,17 @@ df_recency['Recency'] = pd.cut(df_recency['GapDay'], 5, labels=[5, 4, 3, 2, 1], 
 
 ## Recommendations
 
-- 
+- The company has successfully maintained its **Champions** reseller segment. This group consistently makes purchases, has a high average order value, and remains actively engaged.
+→ The key challenge is: "How to retain and nurture these high-value resellers?". To achieve this, the company needs to focus on enhancing customer care and implementing strategies that encourage repeat purchases among these resellers.
+
+- At the same time, the company possesses a promising **Potential Loyalist** and **Loyal Reseller* segment who purchase frequently but have a relatively lower order value.
+→ A strategic approach here would be to introduce incentive programs tied to spending thresholds, encouraging them to increase their order size over time.
+
+- On the other hand, the company has a significant number of **At Risk** and **Needing Attention** resellers - those with a moderate to high purchase frequency and decent order value but have not placed any recent transactions.
+→ The potential reason behind this inactivity might be dissatisfaction with the purchasing experience. The company should conduct surveys and research to identify underlying issues and implement corrective measures promptly. However, there is still an opportunity to re-engage this group in the near future.
+
+- Lastly, the Hibernating, About to Sleep, and Lost resellers form a sizable but low-value segment, characterized by weak purchasing behavior and low order value.
+→ Reactivating these resellers is challenging and would require a well-defined strategy to reposition the brand and address any negative perceptions they may have.
 
 ## Limitations
 
