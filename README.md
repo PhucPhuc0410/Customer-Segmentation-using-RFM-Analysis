@@ -124,3 +124,4 @@ If you find this project useful, feel free to ⭐. Your support will be my super
 
 📧 **Contact:** nguyenhoanggiaphucwork@gmail.com
 
+🔗 **LinkedIn:** [Nguyen Hoang Gia Phuc](https://www.linkedin.com/in/nguyenhoanggiaphuc)
